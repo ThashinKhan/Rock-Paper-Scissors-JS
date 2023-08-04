@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Rock Paper Scissors</title>
+    </head>
+
+    <body>
+        <script>
+            function getComputerChoice(){
+                let randVar = Math.floor(Math.random() * 3); //return random variable from 0-2
+                if(randVar == 0) return "rock";
+                if(randVar == 1) return "paper";
+                if(randVar == 2) return "scissor";
+            }
+
+            function getPlayerChoice(){
+                let userInput = prompt("What is your choice?");
+
+                if(userInput === '' || userInput === null){ //empty string = '' and esc = null
+                    return "invalid";
+                }
+                else if(userInput.toLowerCase() === "rock" || userInput.toLowerCase() === "paper" || userInput.toLowerCase() === "scissor"){
+                    return userInput.toLowerCase();
+                }
+                else{
+                    return "invalid";
+                }
+            }
+
+            function playRound(playerSelection, computerSelection){
+                if(playerSelection === "invalid") return playerSelection;
+
+                else if(playerSelection === computerSelection) return "tie";
+
+                else if (playerSelection === "rock"){
+                    if(computerSelection === "paper") return `lose: ${computerSelection} beats ${playerSelection}`;
+                    if(computerSelection === "scissor") return `win: ${playerSelection} beats ${computerSelection}`;
+                }
+                else if(playerSelection === "paper"){
+                    if(computerSelection === "rock") return `win: ${playerSelection} beats ${computerSelection}`;
+                    if(computerSelection === "scissor") return `lose: ${computerSelection} beats ${playerSelection}`;
+                }
+                else if(playerSelection === "scissor"){
+                    if(computerSelection === "rock") return `lose: ${computerSelection} beats ${playerSelection}`;
+                    if(computerSelection === "paper") return `win: ${playerSelection} beats ${computerSelection}`;
+                }
+            }
+
+            function game(){
+                let result = playRound(getPlayerChoice(), getComputerChoice()) + "\n"; //Initialize variable so it's not undefined.
+
+                for(let i = 0; i < 4; i++){ //Play 4 + 1 rounds = 5.
+                    result += playRound(getPlayerChoice(), getComputerChoice()) + "\n";
+                }
+
+                return result;
+            }
+
+            console.log(game());
+
+        </script>
+    </body>
+
+</html>
