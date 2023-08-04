@@ -49,16 +49,25 @@
             }
 
             function game(){
-                let result = playRound(getPlayerChoice(), getComputerChoice()) + "\n"; //Initialize variable so it's not undefined.
+                let compScore = 0;
+                let playerScore = 0;
+                let tieRound = 0;
 
-                for(let i = 0; i < 4; i++){ //Play 4 + 1 rounds = 5.
-                    result += playRound(getPlayerChoice(), getComputerChoice()) + "\n";
+                for(let i = 0; i < 5; i++){
+                    result = playRound(getPlayerChoice(), getComputerChoice());
+                    console.log(result);
+                    result = result.split(":"); //Split result into array. Either can be: win, lose, tie, or invalid. If invalid, no one wins.
+                    if(result[0] === "win") playerScore++;
+                    if(result[0] === "lose") compScore++;
+                    if(result[0] === "tie") tieRound++;
                 }
 
-                return result;
+                if(playerScore > compScore) console.log(`You Win!\nPlayer Score: ${playerScore}\nComputer Score: ${compScore}\nTie Rounds: ${tieRound}`);
+                else if(playerScore === compScore) console.log(`Tie!\nPlayer Score: ${playerScore}\nComputer Score: ${compScore}\nTie Rounds: ${tieRound}`);
+                else if(playerScore < compScore) console.log(`You Lose!\nPlayer Score: ${playerScore}\nComputer Score: ${compScore}\nTie Rounds: ${tieRound}`);
             }
 
-            console.log(game());
+            game();
 
         </script>
     </body>
